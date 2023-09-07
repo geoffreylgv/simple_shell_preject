@@ -7,9 +7,14 @@
 int main(void)
 {
 
+	char *lineptr;
+	size_t n = 0;
+
 	while(1)
 	{
-		printf("%s", "oursimpleshell $ ");
+		print_string("oursimpleshell$");
+		getline(&lineptr, &n, stdin);
+
 	}
 
 	return (0);
