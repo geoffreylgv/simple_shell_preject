@@ -12,7 +12,7 @@ int main(void)
 
 	while(1)
 	{
-		print_string("oursimpleshell$");
+		print_string("oursimpleshell$ ");
 		getline(&lineptr, &n, stdin);
 
 	}
