@@ -26,7 +26,7 @@ int print_string(char *str)
 		return (i);
 	}
 
-	while(str[i])
+	while(*str != '\0')
 	{
 		_putchar(*str);
 		str++;
