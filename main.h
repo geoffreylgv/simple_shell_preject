@@ -8,5 +8,6 @@
 
 int _putchar(char c);
 int print_string(char *str);
+void handle_ctrld(ssize_t value, char **lineptr);
 
 #endif
