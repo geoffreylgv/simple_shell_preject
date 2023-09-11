@@ -11,8 +11,16 @@
 
 extern char **environ;
 
+/* print to std 1 | 2*/
+void _puts(char *str);
+void _puts2(char *str);
 int _putchar(char c);
+int _putchar2(char c);
 int print_string(char *str);
+int print_string2(char *str);
+void print_error(char run, char *cmd, char *msg);
+
+/* principal tasks's funtions */
 void handle_ctrld(ssize_t value, char **lineptr);
 char *path(char *rep, char *command);
 char **token_string(char *command);

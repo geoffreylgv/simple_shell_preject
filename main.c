@@ -11,7 +11,6 @@ int main(int argc, char **argv, char **env)
 	size_t n = 0;
 	ssize_t value;
 	int isterm = isatty(0), iter = 0;
-	int run;
 
 	(void)argc,(void)env, argv = NULL;
 
@@ -38,9 +37,7 @@ int main(int argc, char **argv, char **env)
 
 			if (get_cmd == NULL)
 			{
-				run = (iter + '0');
-				(void)run;
-				perror(": :");
+				print_error((iter + '0'), args[0], "not found");
 				free(args);
 				errno = 127;
 				continue;
