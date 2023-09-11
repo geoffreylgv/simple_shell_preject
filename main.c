@@ -11,7 +11,7 @@ int main(int argc, char **argv, char **env)
 	size_t n = 0;
 	ssize_t value;
 	int isterm = isatty(0), iter = 0;
-	/*int run;*/
+	int run;
 
 	(void)argc,(void)env, argv = NULL;
 
@@ -38,8 +38,11 @@ int main(int argc, char **argv, char **env)
 
 			if (get_cmd == NULL)
 			{
-				perror(lineptr);
+				run = (iter + '0');
+				(void)run;
+				perror(": :");
 				free(args);
+				errno = 127;
 				continue;
 			}
 			launch_one(args, argv, get_cmd);
@@ -52,5 +55,5 @@ int main(int argc, char **argv, char **env)
 	}
 	free(lineptr);
 
-	return (errno);
+	return (0);
 }
