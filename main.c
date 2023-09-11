@@ -7,14 +7,13 @@
 int main(int argc, char **argv, char **env)
 {
 
-	char *lineptr = NULL/*, **tokens = NULL*/, *sep = " \n";
+	char *lineptr = NULL, **args = NULL, *get_cmd = NULL;
 	size_t n = 0;
 	ssize_t value;
-	int isterm = isatty(0), i = 0, j = 0, iter = 0, status;
-	pid_t child;
-	int run;
+	int isterm = isatty(0), iter = 0;
+	/*int run;*/
 
-	(void)argc, (void)argv;
+	(void)argc,(void)env, argv = NULL;
 
 	while(1)
 	{
@@ -25,38 +24,33 @@ int main(int argc, char **argv, char **env)
 
 		if (value == -1)
 			handle_ctrld(value, &lineptr);
+		/** tokenization*/
+		args = token_string(lineptr);
+		if (args[0] == NULL)
+		{
+			free(args);
+			continue;
+		}
+		/** access right on the path*/
+		if (access(args[0], X_OK) == -1)
+		{
+			get_cmd = path(get_envpath(), args[0]);
 
-		while (lineptr[i])
-		{
-			if (lineptr[i] == '\n')
-				lineptr[i] = 0;
-			i++;
+			if (get_cmd == NULL)
+			{
+				perror(lineptr);
+				free(args);
+				continue;
+			}
+			launch_one(args, argv, get_cmd);
+			continue;
 		}
-		argv[j] = strtok(lineptr, sep);
-		child = fork();
-		while (argv[j])
-			argv[++j] = strtok(NULL, sep);
-
-		if (child == - 1)
-		{
-			perror("");
-			exit(0);
-		}
-		else if (child == 0)
-		{
-			run = execve(lineptr, argv, env);
-			if (run == -1)
-				perror("hsh :iter :lineptr :command not found");
-		}
-		else
-		{
-			wait(&status);
-			errno = WIFEXITED(status);
-		}
+		launch_two(args, argv);
+		continue;
 
 
 	}
 	free(lineptr);
 
-	return (0);
+	return (errno);
 }
