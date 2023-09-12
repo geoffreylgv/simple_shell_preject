@@ -6,20 +6,18 @@
  * @command: the command
  * Return: ptr
 */
-
 char *path(char *rep, char *command)
 {
 	char **tokenized = NULL, *relative_path = NULL, *tmp = NULL, *token = NULL;
 	int i = 0;
-	size_t lenght= 0;
+	size_t lenght = 0;
 
 	if (rep == NULL)
 		return (NULL);
-
 	tmp = strtok(rep, "=");
 	tmp = strtok(NULL, "=");
-
 	tokenized = malloc(sizeof(char *) * 30);
+
 	if (tokenized == NULL)
 	{
 		free(rep);
@@ -34,11 +32,10 @@ char *path(char *rep, char *command)
 		i++;
 	}
 	tokenized[i] = NULL;
-	i = 0;
 
 	while (tokenized[i] != NULL)
 	{
-		lenght= strlen(tokenized[i]) + strlen(command) + 2;
+		lenght = strlen(tokenized[i]) + strlen(command) + 2;
 		relative_path = malloc(lenght);
 		strcpy(relative_path, tokenized[i]);
 		strcat(relative_path, "/");

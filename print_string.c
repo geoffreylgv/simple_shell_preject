@@ -13,7 +13,7 @@ int _putchar(char c)
 
 /**
  * _puts - prints string
- * @c: char to print
+ * @str: The string param
  * Return: n/a void
  */
 void _puts(char *str)
@@ -26,7 +26,7 @@ void _puts(char *str)
 }
 
 /**
- * print_strin - prints out the string passed
+ * print_string - prints out the string passed
  * @str: the string param
  * Return: integer number of character printed
  */
@@ -40,7 +40,7 @@ int print_string(char *str)
 		return (i);
 	}
 
-	while(*str != '\0')
+	while (*str != '\0')
 	{
 		_putchar(*str);
 		str++;

@@ -13,7 +13,7 @@ int _putchar2(char c)
 
 /**
  * _puts2 - prints string
- * @c: char to print
+ * @str: char to print
  * Return: n/a void
  */
 void _puts2(char *str)
@@ -40,7 +40,7 @@ int print_string2(char *str)
 		return (i);
 	}
 
-	while(*str != '\0')
+	while (*str != '\0')
 	{
 		_putchar2(*str);
 		str++;

@@ -9,7 +9,7 @@
 char **token_string(char *command)
 {
 	int i = 0;
-    char *delim = " \n";
+	char *delim = " \n";
 	char *token = NULL;
 	char **tokens = NULL;/*list of token*/
 

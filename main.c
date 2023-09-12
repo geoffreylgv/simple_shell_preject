@@ -2,6 +2,9 @@
 
 /**
  * main - entry point
+ * @argv: array with size of argc
+ * @argc: the size of argv
+ * @env: environment path
  * Return: 0  on success
  */
 int main(int argc, char **argv, char **env)
@@ -12,9 +15,9 @@ int main(int argc, char **argv, char **env)
 	ssize_t value;
 	int isterm = isatty(0), iter = 0;
 
-	(void)argc,(void)env, argv = NULL;
+	(void)argc, (void)env, argv = NULL;
 
-	while(1)
+	while (1)
 	{
 		iter++;
 		if (isterm == 1)
@@ -37,6 +40,8 @@ int main(int argc, char **argv, char **env)
 
 			if (get_cmd == NULL)
 			{
+				if (handle_exit(args, &lineptr) == 0)
+					continue;
 				print_error((iter + '0'), args[0], "not found");
 				free(args);
 				errno = 127;

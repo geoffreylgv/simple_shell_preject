@@ -22,6 +22,7 @@ void print_error(char run, char *cmd, char *msg);
 
 /* principal tasks's funtions */
 void handle_ctrld(ssize_t value, char **lineptr);
+int handle_exit(char **cmd, char **lineptr);
 char *path(char *rep, char *command);
 char **token_string(char *command);
 char *get_envpath(void);
