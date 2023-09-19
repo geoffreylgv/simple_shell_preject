@@ -36,12 +36,13 @@ int main(int argc, char **argv, char **env)
 		/** access right on the path*/
 		if (access(args[0], X_OK) == -1)
 		{
+				if (builtin_handler(args, &lineptr) != 0)
+					continue;
+
 			get_cmd = path(get_envpath(), args[0]);
 
 			if (get_cmd == NULL)
 			{
-				if (handle_exit(args, &lineptr) == 0)
-					continue;
 				print_error((iter + '0'), args[0], "not found");
 				free(args);
 				errno = 127;

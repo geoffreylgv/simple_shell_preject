@@ -19,10 +19,11 @@ int _putchar2(char c);
 int print_string(char *str);
 int print_string2(char *str);
 void print_error(char run, char *cmd, char *msg);
+int _strlen(char *s);
 
 /* principal tasks's funtions */
 void handle_ctrld(ssize_t value, char **lineptr);
-int handle_exit(char **cmd, char **lineptr);
+int builtin_handler(char **cmd, char **lineptr);
 char *path(char *rep, char *command);
 char **token_string(char *command);
 char *get_envpath(void);
