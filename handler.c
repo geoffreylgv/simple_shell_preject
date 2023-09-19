@@ -24,6 +24,7 @@ void handle_ctrld(ssize_t value, char **lineptr)
 {
 	if (value == -1)
 	{
+		_putchar('\n');
 		free(*lineptr);
 		exit(errno);
 	}

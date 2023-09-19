@@ -13,7 +13,6 @@ int main(int argc, char **argv, char **env)
 	size_t n = 0;
 	ssize_t value;
 	int isterm = isatty(0), iter = 0;
-
 	(void)argc, (void)env, argv = NULL;
 
 	while (1)
@@ -22,7 +21,6 @@ int main(int argc, char **argv, char **env)
 		if (isterm == 1)
 			print_string("$ ");
 		value = getline(&lineptr, &n, stdin);
-
 		if (value == -1)
 			handle_ctrld(value, &lineptr);
 		args = token_string(lineptr);
@@ -36,7 +34,6 @@ int main(int argc, char **argv, char **env)
 			if (builtin_handler(args, lineptr) != 0)
 				continue;
 			get_cmd = path(get_envpath(), args[0]);
-
 			if (get_cmd == NULL)
 			{
 				print_error((iter + '0'), args[0], "not found");
@@ -53,4 +50,3 @@ int main(int argc, char **argv, char **env)
 	free(lineptr);
 	return (0);
 }
-
