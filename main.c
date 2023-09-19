@@ -9,7 +9,6 @@
  */
 int main(int argc, char **argv, char **env)
 {
-
 	char *lineptr = NULL, **args = NULL, *get_cmd = NULL;
 	size_t n = 0;
 	ssize_t value;
@@ -26,19 +25,16 @@ int main(int argc, char **argv, char **env)
 
 		if (value == -1)
 			handle_ctrld(value, &lineptr);
-		/** tokenization*/
 		args = token_string(lineptr);
 		if (args[0] == NULL)
 		{
 			free(args);
 			continue;
 		}
-		/** access right on the path*/
 		if (access(args[0], X_OK) == -1)
 		{
-				if (builtin_handler(args, &lineptr) != 0)
-					continue;
-
+			if (builtin_handler(args, lineptr) != 0)
+				continue;
 			get_cmd = path(get_envpath(), args[0]);
 
 			if (get_cmd == NULL)
@@ -53,10 +49,8 @@ int main(int argc, char **argv, char **env)
 		}
 		launch_two(args, argv);
 		continue;
-
-
 	}
 	free(lineptr);
-
 	return (0);
 }
+

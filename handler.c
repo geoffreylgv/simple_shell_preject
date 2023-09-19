@@ -35,22 +35,22 @@ void handle_ctrld(ssize_t value, char **lineptr)
  * @lineptr: the buffer
  * Return: 0 on success
  */
-int builtin_handler(char **cmd, char **lineptr)
+int builtin_handler(char **cmd, char *lineptr)
 {
 	int success = 0, i;
 
 	if (strcmp(cmd[0], "exit") == 0)
 	{
-		free(*lineptr);
-		free(*cmd);
+		free(cmd);
+		free(lineptr);
 		exit(errno);
 	}
 	else if (strcmp(cmd[0], "env") == 0)
 	{
 		for (i = 0; environ[i] != NULL; i++)
 		{
-				print_string(environ[i]);
-				_putchar('\n');
+			print_string(environ[i]);
+			_putchar('\n');
 		}
 		/*free(*cmd);*/
 		success = 1;
@@ -58,3 +58,4 @@ int builtin_handler(char **cmd, char **lineptr)
 
 	return (success);
 }
+

@@ -23,11 +23,18 @@ int _strlen(char *s);
 
 /* principal tasks's funtions */
 void handle_ctrld(ssize_t value, char **lineptr);
-int builtin_handler(char **cmd, char **lineptr);
+int builtin_handler(char **cmd, char *lineptr);
 char *path(char *rep, char *command);
 char **token_string(char *command);
 char *get_envpath(void);
 int launch_one(char **args, char **argv, char *getcmd);
 int launch_two(char **args, char **argv);
 
+/**path derive*/
+char **tokenize_path(char *rep);
+int check_file_exists_and_is_executable(char *file_path);
+char *construct_full_path(char *relative_path, char *command);
+
+
 #endif
+
