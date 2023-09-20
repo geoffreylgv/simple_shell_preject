@@ -64,3 +64,8 @@ test
 -test
 hsh
 hsh_*
+
+TEST_SUITES
+allowed_functions
+runchecker.bash
+
