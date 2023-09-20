@@ -6,12 +6,13 @@
  * and is executable and launch	it if it is. Otherwise,
  * print an error message.
  * @args: command cahr pointer
+ * @argv: arg list container
  * @isterm: if it's a tty (isatty)
  * @iter: command run count
  * Return: errno (last status)	on success or not
  */
-void check_and_launch_file(char	**args, char **argv, int isterm, int iter)	{
-
+void check_and_launch_file(char	**args, char **argv, int isterm, int iter)
+{
 	char *get_cmd = path(get_envpath(), args[0]);
 
 	if (get_cmd == NULL)
@@ -22,7 +23,7 @@ void check_and_launch_file(char	**args, char **argv, int isterm, int iter)	{
 
 		errno =	127;
 		return;
-  	}
+	}
 
 	launch_one(args, argv, get_cmd);
 }
@@ -36,14 +37,13 @@ void check_and_launch_file(char	**args, char **argv, int isterm, int iter)	{
  */
 int main(int argc, char **argv, char **env)
 {
-
 	char *lineptr = NULL, **args = NULL;
-  	size_t n = 0;
+	size_t n = 0;
 	ssize_t value;
 	int isterm = isatty(0), iter = 0;
-	errno = 0;
-
 	(void)argc, (void)env, argv = NULL;
+
+	errno = 0;
 
 	while (1)
 	{
@@ -55,6 +55,8 @@ int main(int argc, char **argv, char **env)
 
 		if (value == -1)
 			handle_ctrld(value, &lineptr);
+
+		handle_htag(lineptr);
 
 		args = token_string(lineptr);
 

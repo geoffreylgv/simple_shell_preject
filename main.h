@@ -24,6 +24,9 @@ int _strlen(char *s);
 /* principal tasks's funtions */
 void handle_ctrld(ssize_t value, char **lineptr);
 int builtin_handler(char **cmd, char *lineptr);
+void handle_htag(char *strtag);
+
+
 char *path(char *rep, char *command);
 char **token_string(char *command);
 char *get_envpath(void);

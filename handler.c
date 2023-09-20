@@ -59,3 +59,28 @@ int builtin_handler(char **cmd, char *lineptr)
 	return (success);
 }
 
+/**
+ * handle_htag - Funtion that Checks if the string start by htag
+ * if string is comment
+ * @strtag: check string given and fix htag by \0
+ * Return: NA nothing
+ */
+
+void handle_htag(char *strtag)
+{
+	int i = 0;
+
+	while (strtag[i])
+	{
+		if (i > 0 && strtag[i] == '#' && strtag[i - 1] != ' ')
+			break;
+
+		if (strtag[i] == '#')
+		{
+			strtag[i] = '\0';
+			break;
+		}
+		i++;
+	}
+}
+
