@@ -1,18 +1,47 @@
+
 #include "main.h"
 
 /**
- * main - entry point
- * @argv: array with size of argc
+ * check_and_launch_file - Function	to check if the	file exists
+ * and is executable and launch	it if it is. Otherwise,
+ * print an error message.
+ * @args: command cahr pointer
+ * @isterm: if it's a tty (isatty)
+ * @iter: command run count
+ * Return: errno (last status)	on success or not
+ */
+void check_and_launch_file(char	**args, char **argv, int isterm, int iter)	{
+
+	char *get_cmd = path(get_envpath(), args[0]);
+
+	if (get_cmd == NULL)
+	{
+		print_error((iter + '0'), args[0], "not	found");
+		if (isterm != 1)
+			exit(127);
+
+		errno =	127;
+		return;
+  	}
+
+	launch_one(args, argv, get_cmd);
+}
+
+/**
+ * main	- entry	point
+ * @argv: array	with size of argc
  * @argc: the size of argv
  * @env: environment path
- * Return: 0  on success
+ * Return: errno (last status)	on success or not
  */
 int main(int argc, char **argv, char **env)
 {
-	char *lineptr = NULL, **args = NULL, *get_cmd = NULL;
-	size_t n = 0;
+
+	char *lineptr = NULL, **args = NULL;
+  	size_t n = 0;
 	ssize_t value;
 	int isterm = isatty(0), iter = 0;
+	errno = 0;
 
 	(void)argc, (void)env, argv = NULL;
 
@@ -21,11 +50,14 @@ int main(int argc, char **argv, char **env)
 		iter++;
 		if (isterm == 1)
 			print_string("$ ");
-		value = getline(&lineptr, &n, stdin);
+
+		value =	getline(&lineptr, &n, stdin);
 
 		if (value == -1)
 			handle_ctrld(value, &lineptr);
+
 		args = token_string(lineptr);
+
 		if (args[0] == NULL)
 		{
 			free(args);
@@ -35,22 +67,14 @@ int main(int argc, char **argv, char **env)
 		{
 			if (builtin_handler(args, lineptr) != 0)
 				continue;
-			get_cmd = path(get_envpath(), args[0]);
 
-			if (get_cmd == NULL)
-			{
-				print_error((iter + '0'), args[0], "not found");
-				free(args);
-				errno = 127;
+			check_and_launch_file(args, argv, isterm, iter);
 				continue;
-			}
-			launch_one(args, argv, get_cmd);
-			continue;
 		}
 		launch_two(args, argv);
-		continue;
+			continue;
 	}
 	free(lineptr);
-	return (0);
+	return (errno);
 }
 
