@@ -19,4 +19,3 @@ void print_error(char run, char *cmd, char *msg)
 	_puts2(msg);
 	_putchar2('\n');
 }
-

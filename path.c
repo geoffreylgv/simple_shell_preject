@@ -1,11 +1,10 @@
 #include "main.h"
 
 /**
- * tokenize_path - the PATH		environment		variable into an array of strings.
- *
+ * tokenize_path - the PATH	environment	variable into an array of strings.
  * @rep: The PATH environment variable.
- * Return: An array		of strings containing the individual paths in
- * the PATH		environment		variable, or NULL if an error occurred.
+ * Return: An array	of strings containing the individual paths in
+ * the PATH	environment	variable, or NULL if an error occurred.
  */
 char **tokenize_path(char *rep)
 {
@@ -109,4 +108,3 @@ char *path(char	*rep, char *command)
 	free(rep);
 	return (NULL);
 }
-

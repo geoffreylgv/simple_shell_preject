@@ -38,6 +38,4 @@ char **tokenize_path(char *rep);
 int check_file_exists_and_is_executable(char *file_path);
 char *construct_full_path(char *relative_path, char *command);
 
-
 #endif
-
