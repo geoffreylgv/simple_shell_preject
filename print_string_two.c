@@ -48,3 +48,4 @@ int print_string2(char *str)
 	}
 	return (i);
 }
+
