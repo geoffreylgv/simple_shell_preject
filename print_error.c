@@ -16,7 +16,7 @@ void print_error(char run, char *cmd, char *msg)
 	print_string2(": ");
 	print_string2(cmd);
 	print_string2(": ");
-	print_string2(msg);
-	print_string2("\n");
+	_puts2(msg);
+	_putchar2('\n');
 }
 

@@ -17,7 +17,7 @@ void check_and_launch_file(char	**args, char **argv, int isterm, int iter)
 
 	if (get_cmd == NULL)
 	{
-		print_error((iter + '0'), args[0], "not	found");
+		print_error((iter + '0'), args[0], "not found");
 		if (isterm != 1)
 			exit(127);
 
@@ -48,8 +48,7 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		iter++;
-		if (isterm == 1)
-			print_string("$ ");
+		(isterm == 1) ? print_string("$ ") : 0;
 
 		value =	getline(&lineptr, &n, stdin);
 
